@@ -26,7 +26,16 @@ public class ViewLayer {
         System.out.println("8 - Gib einen Zutat und zeig alle Speisen mit diesem Zutat an");
         Scanner console = new Scanner(System.in);
         while(console.hasNextInt()){
-            int choice = console.nextInt();
+            int choice = 0;
+            try {
+                choice = console.nextInt();
+            }
+            catch (Exception e){
+                System.out.println("Error: Integer not found.");
+            }
+            if (choice == 0){
+                System.out.println("Error found. Start the program again");
+            }
             if(choice == 1){
                 Zutat newZutat = new Zutat("", NULL, NULL);
                 Scanner scanner = new Scanner(System.in);
