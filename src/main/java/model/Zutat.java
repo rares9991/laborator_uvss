@@ -2,10 +2,10 @@ package model;
 
 public class Zutat {
     private String name;
-    private int preis;
+    private double preis;
     private int menge;
 
-    public Zutat(String name, int preis, int menge) {
+    public Zutat(String name, double preis, int menge) {
         this.name = name;
         this.preis = preis;
         this.menge = menge;
@@ -23,7 +23,7 @@ public class Zutat {
         return preis;
     }
 
-    public void setPreis(int preis) {
+    public void setPreis(double preis) {
         this.preis = preis;
     }
 

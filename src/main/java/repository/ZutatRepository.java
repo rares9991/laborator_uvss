@@ -23,11 +23,18 @@ public class ZutatRepository implements CrudRepo<String, Zutat>{
 
     @Override
     public void update(String name, Zutat newEntity) {
-        for(Zutat zutat: alleZutaten){
-            if(zutat.getName().equals(name)){
-                zutat = newEntity;
-                break;
+        if(newEntity.getPreis() > 0 && newEntity.getPreis() <= 100
+                && newEntity.getMenge() >= 1 && newEntity.getMenge() <= 100) {
+            for (Zutat zutat : alleZutaten) {
+                if (zutat.getName().equals(name)) {
+                    zutat.setMenge(newEntity.getMenge());
+                    zutat.setPreis(newEntity.getPreis());
+                    break;
+                }
             }
+        }
+        else {
+            System.out.println("Your update was not possible due to not respecting the constraints");
         }
     }
 
@@ -40,5 +47,9 @@ public class ZutatRepository implements CrudRepo<String, Zutat>{
         for(Zutat zutat: alleZutaten){
             System.out.println(zutat.getName()+" "+zutat.getPreis()+" "+zutat.getMenge());
         }
+    }
+
+    public List<Zutat> getAlleZutaten() {
+        return alleZutaten;
     }
 }

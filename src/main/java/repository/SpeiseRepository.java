@@ -27,7 +27,7 @@ public class SpeiseRepository implements CrudRepo<Integer, Speise>{
 
     @Override
     public void update(Integer id, Speise newEntity) {
-        for(Speise speise: alleSpeisen){
+        for(Speise speise: alleSpeisen) {
             if(speise.getId() == id) {
                 speise = newEntity;
                 break;
