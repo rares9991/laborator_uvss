@@ -43,6 +43,37 @@ public class ZutatRepository implements CrudRepo<String, Zutat>{
         return alleZutaten.stream().filter(byMenge).collect(Collectors.toList());
     }
 
+    public List<Zutat> rabattEinstellen(double prozent) {
+        if (prozent > 0 && prozent <= 100) {
+            for(Zutat zutat: alleZutaten){
+                var copyProzent = prozent;
+                var preis = zutat.getPreis();
+                if(preis <= 20){
+                    copyProzent /= 4;
+                    setNeuerPreis(copyProzent, zutat, preis);
+                } else if (preis > 20 && preis <= 30) {
+                    copyProzent /= 3;
+                    setNeuerPreis(copyProzent, zutat, preis);
+                } else if (preis > 30 && preis <= 40) {
+                    copyProzent /= 2;
+                    setNeuerPreis(copyProzent, zutat, preis);
+                } else if (preis > 40) {
+                    setNeuerPreis(copyProzent, zutat, preis);
+                }
+            }
+        }
+        else {
+            System.out.println("Der Prozent des Rabatts muss zwischen 0 und 100 sein.");
+        }
+        return alleZutaten;
+    }
+
+    private static void setNeuerPreis(double prozent, Zutat zutat, double preis) {
+        preis = (preis * prozent) / 100;
+        zutat.setPreis(zutat.getPreis() - preis);
+        System.out.println(zutat.getPreis());
+    }
+
     public void printAllZutaten(){
         for(Zutat zutat: alleZutaten){
             System.out.println(zutat.getName()+" "+zutat.getPreis()+" "+zutat.getMenge());

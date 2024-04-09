@@ -14,9 +14,9 @@ class ZutatRepositoryTest {
     void setup(){
         Zutat zutat1 = new Zutat("onion", 10, 62);
         Zutat zutat2 = new Zutat("tomato", 12.7, 80);
-        Zutat zutat3 = new Zutat("potato", 15.5, 23);
-        Zutat zutat4 = new Zutat("garlic", 7.75, 97);
-        Zutat zutat5 = new Zutat("pepper", 8.25, 4);
+        Zutat zutat3 = new Zutat("potato", 49, 23);
+        Zutat zutat4 = new Zutat("garlic", 24, 97);
+        Zutat zutat5 = new Zutat("pepper", 37, 4);
 
         sut.add(zutat1);
         sut.add(zutat2);
@@ -144,4 +144,70 @@ class ZutatRepositoryTest {
         assertEquals(12.7, sut.getAlleZutaten().get(1).getPreis());
     }
 
+    @Test
+    void rabattEinstellen_1() {
+        // Given
+        Zutat newZutat = new Zutat("hrean", 15, 40);
+        sut.add(newZutat);
+
+        // When
+        var newList = sut.rabattEinstellen(48);
+        double expected = 13.2;
+
+        // Then
+        assertEquals(expected, sut.getAlleZutaten().get(5).getPreis());
+    }
+
+    @Test
+    void rabattEinstellen_2() {
+        // Given
+        Zutat newZutat = new Zutat("hrean", 25, 40);
+        sut.add(newZutat);
+
+        // When
+        var newList = sut.rabattEinstellen(48);
+        double expected = 21;
+
+        // Then
+        assertEquals(expected, sut.getAlleZutaten().get(5).getPreis());
+    }
+
+    @Test
+    void rabattEinstellen_3() {
+        // Given
+        Zutat newZutat = new Zutat("hrean", 35, 40);
+        sut.add(newZutat);
+
+        // When
+        var newList = sut.rabattEinstellen(48);
+        double expected = 26.6;
+
+        // Then
+        assertEquals(expected, sut.getAlleZutaten().get(5).getPreis());
+    }
+
+    @Test
+    void rabattEinstellen_4() {
+        // Given
+        Zutat newZutat = new Zutat("hrean", 50, 40);
+        sut.add(newZutat);
+
+        // When
+        var newList = sut.rabattEinstellen(48);
+        double expected = 26;
+
+        // Then
+        assertEquals(expected, sut.getAlleZutaten().get(5).getPreis());
+    }
+
+    @Test
+    void rabattEinstellen_5() {
+        // Given
+
+        // When
+        var newList = sut.rabattEinstellen(107);
+
+        // Then
+        assertEquals(newList, sut.getAlleZutaten());
+    }
 }
